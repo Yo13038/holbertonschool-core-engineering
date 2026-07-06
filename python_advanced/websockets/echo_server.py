@@ -7,10 +7,12 @@ Module To implement a server that accepts connections ans echoes back
 import asyncio
 import websockets
 
-async def request_client(websocket):
+
+async def connection_handler(websocket):
     """function to handle client request"""
     async for message in websocket:
         await websocket.send(message)
+
 
 async def main():
     async with websockets.serve(request_client, "localhost", 8765) as server:
