@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
+"""Module to implement WebSocket client
 """
-Module to implement WebSocket client.
-"""
-
 
 import asyncio
 from websockets import connect
 
 
 async def connect_and_send(host="localhost", port=8765):
-    async with connect("ws://localhost:8765") as websocket:
+    """Connect to the websocket server and send a message.
+    Accepts the host and port dynamically from the checker.
+    """
+
+    uri = f"ws://{host}:{port}"
+    
+    async with connect(uri) as websocket:
         await websocket.send("Hello WebSocket")
         response = await websocket.recv()
         print(response)
