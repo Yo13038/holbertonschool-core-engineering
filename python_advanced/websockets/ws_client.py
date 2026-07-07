@@ -1,26 +1,19 @@
 #!/usr/bin/env python3
-"""Module to implement WebSocket client
-"""
-
+"""WebSocket client that sends one message to the echo server."""
 import asyncio
-from websockets import connect
+import os
+import websockets
 
 
-async def connect_and_send(*args, **kwargs):
-    """Connect to the websocket server and send a message.
-    Accepts absolutely any arguments structural format from the checker.
-    """
+async def connect_and_send(uri, message):
+    """Send a single message to uri and return the server's response."""
+    async with websockets.connect(uri) as websocket:
+        await websocket.send(message)
+        return await websocket.recv()
 
-    host = args[0] if len(args) > 0 else kwargs.get("host", "localhost")
-    
-    port = args[1] if len(args) > 1 else kwargs.get("port", 8765)
-    
-    uri = f"ws://{host}:{port}"
-    
-    async with connect(uri) as websocket:
-        await websocket.send("Hello WebSocket")
-        response = await websocket.recv()
-        print(response)
 
 if __name__ == "__main__":
-    asyncio.run(connect_and_send())
+    uri = os.environ.get("WS_URI", "ws://localhost:8765")
+    message = os.environ.get("WS_MESSAGE", "demo")
+    response = asyncio.run(connect_and_send(uri, message))
+    print(response, end="")
