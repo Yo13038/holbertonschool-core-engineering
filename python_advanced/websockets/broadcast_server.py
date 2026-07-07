@@ -28,6 +28,7 @@ async def connection_handler(websocket):
     finally:
         clients.discard(websocket)
 
+
 async def main():
     """Main entry point to start the broadcast server.
     """
@@ -36,5 +37,4 @@ async def main():
 
 
 if __name__ == "__main__":
-        asyncio.run(main())
-        
+    asyncio.run(main())
