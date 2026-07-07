@@ -15,7 +15,7 @@ async def connection_handler(websocket):
 
 
 async def main():
-    async with websockets.serve(request_client, "localhost", 8765) as server:
+    async with websockets.serve(connection_handler, "localhost", 8765) as server:
         await server.serve_forever()
 
 if __name__ == "__main__":
