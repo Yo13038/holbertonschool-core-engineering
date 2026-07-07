@@ -7,10 +7,11 @@ import asyncio
 import websockets
 from websockets.exceptions import ConnectionClosed
 
+
 async def connection_handler(websocket):
-    
+
     async for message in websocket:
-        
+
         try:
             not_empty_message = message.strip()
 
@@ -21,6 +22,7 @@ async def connection_handler(websocket):
         except ConnectionClosed:
             pass
 
+
 async def main():
 
     async with websockets.serve(connection_handler, "localhost", 8765):
@@ -29,6 +31,6 @@ async def main():
 
 if __name__ == "__main__":
     try:
-       asyncio.run(main())
+        asyncio.run(main())
     except KeyboardInterrupt:
-       pass
+        pass
