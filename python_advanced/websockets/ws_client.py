@@ -2,14 +2,13 @@
 """Module to implement WebSocket client
 """
 
+import os
 import asyncio
 from websockets import connect
 
 
 async def connect_and_send(host="localhost", port=8765):
-    """Connect to the websocket server and send a message.
-    Accepts the host and port dynamically from the checker.
-    """
+
 
     uri = f"ws://{host}:{port}"
     
