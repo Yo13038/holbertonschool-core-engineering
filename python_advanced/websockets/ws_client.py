@@ -7,7 +7,7 @@ import asyncio
 from websockets import connect
 
 
-async def connect_and_send():
+async def connect_and_send(host="localhost", port=8765):
     async with connect("ws://localhost:8765") as websocket:
         await websocket.send("Hello WebSocket")
         response = await websocket.recv()
