@@ -7,10 +7,9 @@ import asyncio
 from websockets import connect
 
 
-async def connect_and_send(host="localhost", port=8765):
+async def connect_and_send(host, port):
 
-    if host == "localhost":
-        host = "127.0.0.1"
+
     uri = f"ws://{host}:{port}"
     
     async with connect(uri) as websocket:
@@ -19,4 +18,4 @@ async def connect_and_send(host="localhost", port=8765):
         print(response)
 
 if __name__ == "__main__":
-    asyncio.run(connect_and_send())
+    asyncio.run(connect_and_send("127.0.0.1", 8765))
