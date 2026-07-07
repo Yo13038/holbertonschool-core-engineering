@@ -9,7 +9,8 @@ from websockets import connect
 
 async def connect_and_send(host="localhost", port=8765):
 
-
+    if host == "localhost":
+        host = "127.0.0.1"
     uri = f"ws://{host}:{port}"
     
     async with connect(uri) as websocket:
